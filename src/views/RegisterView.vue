@@ -1,6 +1,10 @@
+<script setup>
+import RegistrationFlow from '../components/RegistrationFlow.vue'
+</script>
+
 <template>
   <div class="register">
-    <h1>Register</h1>
+    <RegistrationFlow />
   </div>
 </template>
 
