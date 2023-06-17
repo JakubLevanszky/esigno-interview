@@ -1,20 +1,16 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import Aside from './components/Aside.vue'
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <HelloWorld msg="Hello world message inside App.vue" />
-
-      <nav>
-        <RouterLink to="/">Login</RouterLink>
-        <RouterLink to="/register">Register</RouterLink>
-      </nav>
-    </div>
-  </header>
-
+  <div class="wrapper">
+    <Aside />
+    <main>
+      <RouterLink to="/">Login</RouterLink>
+      <RouterLink to="/register">Register</RouterLink>
+    </main>
+  </div>
   <RouterView />
 </template>
 
