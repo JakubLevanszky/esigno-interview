@@ -22,4 +22,17 @@ defineProps({
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+@import '@/assets/base.css';
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+input {
+  height: 36px;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+}
+</style>
