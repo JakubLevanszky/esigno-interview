@@ -8,9 +8,10 @@ const methods = {
     console.log('handlesubmit')
     axios
       .post(
-        'https://cors-anywhere.herokuapp.com/https://userhw.sandbox.esigno.io/registration',
+        // 'https://cors-anywhere.herokuapp.com/https://userhw.sandbox.esigno.io/registration',
+        'https://userhw.sandbox.esigno.io/registration',
         {
-          email: email
+          email: email.value
         },
         {
           headers: {
