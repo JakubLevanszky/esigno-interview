@@ -9,7 +9,7 @@ const methods = {
     axios
       .post(
         // 'https://cors-anywhere.herokuapp.com/https://userhw.sandbox.esigno.io/registration',
-        'https://userhw.sandbox.esigno.io/registration',
+        '/api/registration',
         {
           email: email.value
         },
