@@ -23,9 +23,6 @@ aside {
   height: 100%;
   width: 100%;
   padding: 32px 0 32px 150px;
-  /* background: linear-gradient(82.92deg, #545ce4 0%, #e698f8 0.01%, #499af7 100%); */
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 7.7%, #ffffff 100%),
-    linear-gradient(76.29deg, #4c4f8d -1.88%, #9479ee -1.87%, #4862e5 55.7%);
-  mix-blend-mode: normal;
+  background-image: url(../assets/background.svg);
 }
 </style>

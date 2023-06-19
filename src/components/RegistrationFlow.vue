@@ -5,10 +5,8 @@ import axios from 'axios'
 
 const methods = {
   handleSubmit() {
-    console.log('handlesubmit')
     axios
       .post(
-        // 'https://cors-anywhere.herokuapp.com/https://userhw.sandbox.esigno.io/registration',
         '/api/registration',
         {
           email: email.value
