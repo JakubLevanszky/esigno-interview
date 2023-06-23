@@ -1,6 +1,6 @@
 <template>
   <div class="input-wrapper">
-    <label v-if="label"> {{ label }}</label>
+    <label class="label" v-if="label"> {{ label }}</label>
     <input
       type="text"
       :value="modelValue"
@@ -29,6 +29,10 @@ defineProps({
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.label {
+  font-size: 12px;
 }
 
 input {

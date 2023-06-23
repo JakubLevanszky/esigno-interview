@@ -1,7 +1,9 @@
 <template>
-  <section v-if="step === 1" class="baseform">
-    <h1>Registrace</h1>
-    <h3>Máte účet? <a href="#">Přihlásit se</a></h3>
+  <section v-if="step === 1" class="regform-wrapper">
+    <div class="regform-header">
+      <h1>Registrace</h1>
+      <span>Máte účet? <RouterLink to="/">Přihlásit se</RouterLink></span>
+    </div>
     <span
       >Na e-mail Vám bude zaslán ověřovací kód. Po ověření prosím pokračujte v dalších krocích
       registrace.</span
@@ -12,9 +14,11 @@
     </form>
   </section>
 
-  <section v-if="step === 2" class="baseform">
-    <h1>Zadejte kód</h1>
-    <a href="#">Zpět na přihlášení</a>
+  <section v-if="step === 2" class="regform-wrapper">
+    <div class="regform-header">
+      <h1>Zadejte kód</h1>
+      <RouterLink to="/">Zpět na přihlášení</RouterLink>
+    </div>
     <span>
       Potřebujeme ověřit vaši identitu, zadejte prosím ověřovací PIN kód, který jsme vám poslali na
       e-mail {{ email }}.
@@ -28,14 +32,16 @@
     <a href="#">Zaslat znovu kód</a>
   </section>
 
-  <section v-if="step === 3" class="baseform" @submit.prevent="passwordCreatedSubmit">
-    <h1>Tvorba hesla</h1>
-    <a href="#">Zpět na přihlášení</a>
+  <section v-if="step === 3" class="regform-wrapper">
+    <div class="regform-header">
+      <h1>Tvorba hesla</h1>
+      <RouterLink to="/">Zpět na přihlášení</RouterLink>
+    </div>
     <span
       >Děkujeme za vaše ověření. Nyní si můžete nastavit heslo. Dbejte prosím, aby heslo bylo
       dostatečně silné a neobsahovalo vaše iniciály či jiné snadno uhodnutelné slova.
     </span>
-    <form @submit.prevent="">
+    <form @submit.prevent="passwordCreatedSubmit">
       <InputCustom
         v-model="passwd"
         type="password"
@@ -62,7 +68,7 @@
     <!-- Jmeno a prijmeni je az v dalsim kroku - nelze overit-->
   </section>
 
-  <section v-if="step === 4" class="baseform">
+  <section v-if="step === 4" class="regform-wrapper">
     <h1>Údaje k registrovanému účtu</h1>
     <span>Pro úspěšnou registraci prosím vyplňte následující údaje k vašemu účtu.</span>
     <form @submit.prevent="detailsSubmit">
@@ -77,14 +83,14 @@
     </form>
   </section>
 
-  <section v-if="step === 5" class="baseform">
+  <section v-if="step === 5" class="regform-wrapper">
     <img src="./icons/robot_happy.png" alt="image of happy robot" />
     <h1>Registrace proběhla úspěšně</h1>
     <span>Děkujeme váš profil byl úspěšně založen. Nyní můžete přejít do portálu Esigno.</span>
     <button>Přejít do Esigno</button>
   </section>
 
-  <section v-if="step === 6" class="baseform">
+  <section v-if="step === 6" class="regform-wrapper">
     <img src="./icons/robot_sad.png" alt="image of sad robot" />
     <h1>Registrace se nezdařila</h1>
     <span
@@ -93,11 +99,11 @@
     >
     <button>Zkusím to znovu</button>
   </section>
+  <RouterView />
 </template>
 
-<!-- todo - split the sections into standalone components and use dynamic components? -->
-
 <script setup>
+import { RouterLink, RouterView } from 'vue-router'
 import InputCustom from './InputCustom.vue'
 import PinCode from './OTP.vue'
 import { ref, computed } from 'vue'
@@ -225,6 +231,26 @@ function detailsSubmit() {
 </script>
 
 <style scoped>
+h1 {
+  font-size: 24px;
+}
+
+.regform-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 463px;
+  padding: 32px;
+  background-color: var(--color-background-form);
+  border-radius: 8px;
+}
+
+.regform-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
 .valid {
   color: green;
 }

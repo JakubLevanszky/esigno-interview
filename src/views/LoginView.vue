@@ -1,9 +1,17 @@
 <script setup>
-import Login from '../components/Login.vue'
+import LoginFlow from '../components/LoginFlow.vue'
 </script>
 
 <template>
   <main>
-    <Login />
+    <div class="login">
+      <LoginFlow />
+    </div>
   </main>
 </template>
+
+<style scoped>
+.login {
+  min-height: 100vh;
+}
+</style>

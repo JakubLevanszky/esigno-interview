@@ -1,5 +1,5 @@
 <script setup></script>
 
 <template>
-  <h1>Login.vue</h1>
+  <h1>LoginFlow.vue</h1>
 </template>

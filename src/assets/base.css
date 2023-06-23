@@ -8,7 +8,7 @@
   --text-pending: #e47410;
 
   --link-static: var(--color-primary-dark-blue);
-  --link-hover: var(var(--color-primary-dark-blue-hover));
+  --link-hover: var(--color-primary-dark-blue-hover);
 }
 
 /* semantic color variables for this project */
@@ -39,7 +39,7 @@ body {
   color: var(--text-black);
   background: var(--color-background);
   font-family: Inter, -apple-system, sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
