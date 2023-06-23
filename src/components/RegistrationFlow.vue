@@ -28,7 +28,7 @@
     <a href="#">Zaslat znovu kód</a>
   </section>
 
-  <section v-if="step === 3" class="baseform">
+  <section v-if="step === 3" class="baseform" @submit.prevent="passwordCreatedSubmit">
     <h1>Tvorba hesla</h1>
     <a href="#">Zpět na přihlášení</a>
     <span
@@ -61,7 +61,41 @@
     <p class="valid">Neobsahuje Vaše jméno a příjmení</p>
     <!-- Jmeno a prijmeni je az v dalsim kroku - nelze overit-->
   </section>
+
+  <section v-if="step === 4" class="baseform">
+    <h1>Údaje k registrovanému účtu</h1>
+    <span>Pro úspěšnou registraci prosím vyplňte následující údaje k vašemu účtu.</span>
+    <form @submit.prevent="detailsSubmit">
+      <InputCustom v-model="name" type="text" label="Jméno" required />
+      <InputCustom v-model="surname" type="text" label="Příjmení" required />
+      <InputCustom v-model="company" type="text" label="Společnost" required />
+      <span
+        >Registrací vyjadřujete souhlas s všeobecnými obchodními podmínkami a zásadami ochrany
+        osobních údajů.</span
+      >
+      <button type="submit">Dokončit registraci</button>
+    </form>
+  </section>
+
+  <section v-if="step === 5" class="baseform">
+    <img src="./icons/robot_happy.png" alt="image of happy robot" />
+    <h1>Registrace proběhla úspěšně</h1>
+    <span>Děkujeme váš profil byl úspěšně založen. Nyní můžete přejít do portálu Esigno.</span>
+    <button>Přejít do Esigno</button>
+  </section>
+
+  <section v-if="step === 6" class="baseform">
+    <img src="./icons/robot_sad.png" alt="image of sad robot" />
+    <h1>Registrace se nezdařila</h1>
+    <span
+      >Vás profil se nepodařilo založit z důvodu chyby na serveru. Prosím opakujte proces znovu nebo
+      nás kontaktujte na e-mail <strong>podpora@esigno.com</strong>.</span
+    >
+    <button>Zkusím to znovu</button>
+  </section>
 </template>
+
+<!-- todo - split the sections into standalone components and use dynamic components? -->
 
 <script setup>
 import InputCustom from './InputCustom.vue'
@@ -73,9 +107,9 @@ const step = ref(1)
 const email = ref('')
 const pincodeValue = ref('')
 const passwd = ref('')
-const name = ''
-const surname = ''
-const company = ''
+const name = ref('')
+const surname = ref('')
+const company = ref('')
 const isLowerAndUpperCase = ref(false)
 const isNumberRef = ref(false)
 const isSpecialRef = ref(false)
@@ -144,6 +178,49 @@ function isPassword() {
   isSpecial ? (isSpecialRef.value = true) : (isSpecialRef.value = false)
   is8CharLong ? (is8CharLongRef.value = true) : (is8CharLongRef.value = false)
   email.value === passwd.value ? (isNotYourEmail.value = true) : (isNotYourEmail.value = false)
+}
+
+function passwordCreatedSubmit() {
+  axios
+    .post(
+      `/api/registration/${email.value}/password`,
+      {
+        password: passwd.value
+      },
+      {
+        headers: {
+          Accept: '*/*',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+      }
+    )
+    .then((respone) => {
+      respone.status === 200 ? (step.value = 4) : console.error('Password is incorrect')
+    })
+}
+
+function detailsSubmit() {
+  axios
+    .post(
+      `/api/registration/${email.value}/details`,
+      {
+        givenName: name.value,
+        surname: surname.value,
+        company: company.value
+      },
+      {
+        headers: {
+          Accept: '*/*',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
+      }
+    )
+    .then((respone) => {
+      respone.status === 200 ? (step.value = 5) : console.error('Details are incorrect')
+      respone.status === 404 ? (step.value = 6) : console.error('Registarce se nezdarila')
+    })
 }
 </script>
 
