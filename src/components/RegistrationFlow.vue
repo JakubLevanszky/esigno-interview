@@ -36,16 +36,29 @@
       dostatečně silné a neobsahovalo vaše iniciály či jiné snadno uhodnutelné slova.
     </span>
     <form @submit.prevent="">
-      {{ passwd }}
-      <InputCustom v-model="passwd" type="password" label="Heslo" required />
-      <button type="submit">Vytvořit a pokračovat</button>
+      <InputCustom
+        v-model="passwd"
+        type="password"
+        label="Heslo"
+        v-on:keyup="isPassword($event)"
+        required
+      />
+      <button type="submit" :disabled="!isDisabled">Vytvořit a pokračovat</button>
     </form>
-    <p>Obsahuje alespoň 8 znaků</p>
-    <p>Obsahuje jak malá písmena (a-z), tak velká (A-Z)</p>
-    <p>Obsahuje alespoň jednu číslici (0-9)</p>
-    <p>Obsahuje alespoň jeden speciální znak (@, #, /)</p>
-    <p>Neobsahuje Vaši e-mailovou adresu</p>
-    <p>Neobsahuje Vaše jméno a příjmení</p>
+    <p :class="{ valid: is8CharLongRef, invalid: !is8CharLongRef }">Obsahuje alespoň 8 znaků</p>
+    <p :class="{ valid: isLowerAndUpperCase, invalid: !isLowerAndUpperCase }">
+      Obsahuje jak malá písmena (a-z), tak velká (A-Z)
+    </p>
+    <p :class="{ valid: isNumberRef, invalid: !isNumberRef }">
+      Obsahuje alespoň jednu číslici (0-9)
+    </p>
+    <p :class="{ valid: isSpecialRef, invalid: !isSpecialRef }">
+      Obsahuje alespoň jeden speciální znak (@, #, /)
+    </p>
+    <p :class="{ valid: !isNotYourEmail, invalid: isNotYourEmail }">
+      Neobsahuje Vaši e-mailovou adresu
+    </p>
+    <p class="valid">Neobsahuje Vaše jméno a příjmení</p>
     <!-- Jmeno a prijmeni je az v dalsim kroku - nelze overit-->
   </section>
 </template>
@@ -53,7 +66,7 @@
 <script setup>
 import InputCustom from './InputCustom.vue'
 import PinCode from './OTP.vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import axios from 'axios'
 
 const step = ref(1)
@@ -63,6 +76,19 @@ const passwd = ref('')
 const name = ''
 const surname = ''
 const company = ''
+const isLowerAndUpperCase = ref(false)
+const isNumberRef = ref(false)
+const isSpecialRef = ref(false)
+const is8CharLongRef = ref(false)
+const isNotYourEmail = ref(true)
+const isDisabled = computed(
+  () =>
+    isLowerAndUpperCase.value &&
+    isNumberRef.value &&
+    isSpecialRef.value &&
+    is8CharLongRef.value &&
+    !isNotYourEmail.value
+)
 
 function regEmailSubmit() {
   axios
@@ -85,7 +111,6 @@ function regEmailSubmit() {
 }
 
 function pincodeSubmit() {
-  console.log(pincodeValue.value)
   axios
     .post(
       `/api/registration/${email.value}/verify`,
@@ -104,6 +129,29 @@ function pincodeSubmit() {
       respone.status === 200 ? (step.value = 3) : console.error('Bad pincode')
     })
 }
+
+function isPassword() {
+  const isUppercase = /[A-Z]/.test(passwd.value)
+  const isLowercase = /[a-z]/.test(passwd.value)
+  const isNumber = /[0-9]/.test(passwd.value)
+  const isSpecial = /[#?!@$%^&*-]/.test(passwd.value)
+  const is8CharLong = passwd.value.length >= 8
+
+  isUppercase && isLowercase
+    ? (isLowerAndUpperCase.value = true)
+    : (isLowerAndUpperCase.value = false)
+  isNumber ? (isNumberRef.value = true) : (isNumberRef.value = false)
+  isSpecial ? (isSpecialRef.value = true) : (isSpecialRef.value = false)
+  is8CharLong ? (is8CharLongRef.value = true) : (is8CharLongRef.value = false)
+  email.value === passwd.value ? (isNotYourEmail.value = true) : (isNotYourEmail.value = false)
+}
 </script>
 
-<style scoped></style>
+<style scoped>
+.valid {
+  color: green;
+}
+.invalid {
+  color: red;
+}
+</style>

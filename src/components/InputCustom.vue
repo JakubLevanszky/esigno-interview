@@ -7,6 +7,7 @@
       @input="$emit('update:modelValue', $event.target.value)"
       v-bind="$attrs"
     />
+    <!-- <img src="/icons/eye_closed_bold.svg" height="30" width="30" class="icon" /> -->
   </div>
 </template>
 
@@ -32,7 +33,10 @@ defineProps({
 
 input {
   height: 36px;
-  border: 1px solid var(--input-border);
+  border: 1px solid var(--input-border); /* move it to the .input-wrapper  */
   border-radius: 4px;
 }
+/* .icon {
+  color: black;
+} */
 </style>
