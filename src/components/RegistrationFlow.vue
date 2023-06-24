@@ -51,21 +51,23 @@
       />
       <button type="submit" :disabled="!isDisabled">Vytvořit a pokračovat</button>
     </form>
-    <p :class="{ valid: is8CharLongRef, invalid: !is8CharLongRef }">Obsahuje alespoň 8 znaků</p>
-    <p :class="{ valid: isLowerAndUpperCase, invalid: !isLowerAndUpperCase }">
-      Obsahuje jak malá písmena (a-z), tak velká (A-Z)
-    </p>
-    <p :class="{ valid: isNumberRef, invalid: !isNumberRef }">
-      Obsahuje alespoň jednu číslici (0-9)
-    </p>
-    <p :class="{ valid: isSpecialRef, invalid: !isSpecialRef }">
-      Obsahuje alespoň jeden speciální znak (@, #, /)
-    </p>
-    <p :class="{ valid: !isNotYourEmail, invalid: isNotYourEmail }">
-      Neobsahuje Vaši e-mailovou adresu
-    </p>
-    <p class="valid">Neobsahuje Vaše jméno a příjmení</p>
-    <!-- Jmeno a prijmeni je az v dalsim kroku - nelze overit-->
+    <div class="validations-wrapper">
+      <p :class="{ valid: is8CharLongRef, invalid: !is8CharLongRef }">Obsahuje alespoň 8 znaků</p>
+      <p :class="{ valid: isLowerAndUpperCase, invalid: !isLowerAndUpperCase }">
+        Obsahuje jak malá písmena (a-z), tak velká (A-Z)
+      </p>
+      <p :class="{ valid: isNumberRef, invalid: !isNumberRef }">
+        Obsahuje alespoň jednu číslici (0-9)
+      </p>
+      <p :class="{ valid: isSpecialRef, invalid: !isSpecialRef }">
+        Obsahuje alespoň jeden speciální znak (@, #, /)
+      </p>
+      <p :class="{ valid: !isNotYourEmail, invalid: isNotYourEmail }">
+        Neobsahuje Vaši e-mailovou adresu
+      </p>
+      <p class="valid">Neobsahuje Vaše jméno a příjmení</p>
+      <!-- Jmeno a prijmeni je az v dalsim kroku - nelze overit-->
+    </div>
   </section>
 
   <section v-if="step === 4" class="regform-wrapper">
@@ -83,22 +85,21 @@
     </form>
   </section>
 
-  <section v-if="step === 5" class="regform-wrapper">
-    <img src="./icons/robot_happy.png" alt="image of happy robot" />
+  <section v-if="step === 5" class="regform-wrapper center">
+    <img src="./icons/robot_happy.png" alt="image of happy robot" class="robot-image" />
     <h1>Registrace proběhla úspěšně</h1>
     <span>Děkujeme váš profil byl úspěšně založen. Nyní můžete přejít do portálu Esigno.</span>
-    <button>Přejít do Esigno</button>
-    <button @click="() => $router.push('/')"></button>
+    <button @click="() => $router.push('/')">Přejít do Esigno</button>
   </section>
 
-  <section v-if="step === 6" class="regform-wrapper">
-    <img src="./icons/robot_sad.png" alt="image of sad robot" />
+  <section v-if="step === 6" class="regform-wrapper center">
+    <img src="./icons/robot_sad.png" alt="image of sad robot" class="robot-image" />
     <h1>Registrace se nezdařila</h1>
     <span
       >Vás profil se nepodařilo založit z důvodu chyby na serveru. Prosím opakujte proces znovu nebo
       nás kontaktujte na e-mail <strong>podpora@esigno.com</strong>.</span
     >
-    <button>Zkusím to znovu</button>
+    <button @click="() => $router.push('/register')">Zkusím to znovu</button>
   </section>
   <RouterView />
 </template>
@@ -246,16 +247,30 @@ h1 {
   border-radius: 8px;
 }
 
+.center.regform-wrapper {
+  align-items: center;
+}
+
 .regform-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
 }
+.robot-image {
+  height: 250px;
+  width: 190px;
+}
+
+.validations-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 .valid {
-  color: green;
+  color: var(--text-positive);
 }
 .invalid {
-  color: red;
+  color: var(--text-dark-grey);
 }
 </style>
