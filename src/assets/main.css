@@ -19,6 +19,16 @@ h3 {
   font-weight: 400;
 }
 
+input {
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+}
+
+input:focus {
+  border: 1px solid var(--input-border-focused);
+  outline: none;
+}
+
 @media (hover: hover) {
   a:hover {
     color: var(--link-hover);
