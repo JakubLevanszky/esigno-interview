@@ -40,6 +40,11 @@ input {
   border: 1px solid var(--input-border); /* move it to the .input-wrapper  */
   border-radius: 4px;
 }
+
+input:focus {
+  border: 1px solid var(--input-border-focused);
+}
+
 /* .icon {
   color: black;
 } */

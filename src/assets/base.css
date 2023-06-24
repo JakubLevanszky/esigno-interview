@@ -1,30 +1,33 @@
 :root {
   --text-dark-grey: #888888;
-  --text-black: #2D2D2D
-  --text-white: #FFFFFF
+  --text-black: #2d2d2d;
+  --text-white: #ffffff;
   --text-positive: #409230;
   --text-negative: #e4162f;
   --text-netutral: var(--color-primary-dark-blue);
   --text-pending: #e47410;
+  --text-headings: #485c6d;
 
   --link-static: var(--color-primary-dark-blue);
   --link-hover: var(--color-primary-dark-blue-hover);
+
+  --input-border: var(--light-gray);
+  --input-border-focused: #4d4d4d;
 }
 
 /* semantic color variables for this project */
 :root {
-  --color-background: #FFFFFF;
+  --color-background: #ffffff;
   --color-background-form: #f7f9fa;
-  --color-primary-dark-blue: #327DDA;
-  --color-primary-dark-blue-hover: #2265BA;
+  --color-primary-dark-blue: #327dda;
+  --color-primary-dark-blue-hover: #2265ba;
 
   --color-status-positive: #e2efe0;
   --color-status-negative: #fbdce0;
   --color-status-neutral: #e0ecf9;
   --color-status-pending: #fbeadb;
 
-  --input-border: #BDBDBD;
-  --input-border-focused: #4D4D4D
+  --light-gray: #bdbdbd;
 }
 
 *,

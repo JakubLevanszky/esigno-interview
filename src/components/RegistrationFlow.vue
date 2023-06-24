@@ -88,6 +88,7 @@
     <h1>Registrace proběhla úspěšně</h1>
     <span>Děkujeme váš profil byl úspěšně založen. Nyní můžete přejít do portálu Esigno.</span>
     <button>Přejít do Esigno</button>
+    <button @click="() => $router.push('/')"></button>
   </section>
 
   <section v-if="step === 6" class="regform-wrapper">

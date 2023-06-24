@@ -1,7 +1,7 @@
 <template>
   <aside>
     <header>
-      <img src="../assets/logo.svg" alt="esigno logo" />
+      <RouterLink to="/"> <img src="../assets/logo.svg" alt="esigno logo" /></RouterLink>
     </header>
     <div class="headline-wrapper">
       <h1>Digitální kancelář</h1>
@@ -19,7 +19,9 @@
   </aside>
 </template>
 
-<script setup></script>
+<script setup>
+import { RouterLink } from 'vue-router'
+</script>
 
 <style scoped>
 aside {
@@ -28,10 +30,26 @@ aside {
   padding: 32px 0 32px 150px;
   background: linear-gradient(45deg, #545ce4 0%, #e698f8 0.01%, #499af7 100%),
     url('../assets/bg_gradient.png'), lightgray 50% / cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .headline-wrapper {
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text-headings);
+}
+
+h3 {
+  font-size: 24px;
+  color: var(--text-headings);
 }
 
 .icons-wrapper {

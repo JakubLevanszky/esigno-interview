@@ -1,10 +1,12 @@
 <script setup>
 import RegistrationFlow from '../components/RegistrationFlow.vue'
+import FooterCustom from '../components/FooterCustom.vue'
 </script>
 
 <template>
   <div class="register">
     <RegistrationFlow />
+    <FooterCustom />
   </div>
 </template>
 

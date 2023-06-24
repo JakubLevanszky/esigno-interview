@@ -1,6 +1,5 @@
 <template>
-  <div ref="otpCont">
-    <!-- todo - change type to number + remove useless regex -->
+  <div ref="otpCont" class="pin-wrapper">
     <input
       type="text"
       class="digit-box"
@@ -8,10 +7,8 @@
       :key="el + ind"
       v-model="digits[ind]"
       :autofocus="ind === 0"
-      :placeholder="ind + 1"
       maxlength="1"
       @keydown="handleKeyDown($event, ind)"
-      :class="{ bounce: digits[ind] !== null }"
     />
   </div>
 </template>
@@ -84,30 +81,20 @@ const handleKeyDown = function (event, index) {
 </script>
 
 <style scoped>
+.pin-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+
 .digit-box {
-  height: 4rem;
-  width: 2rem;
-  border: 2px solid black;
-  display: inline-block;
-  border-radius: 5px;
-  margin: 5px;
-  font-size: 3rem;
-}
-.digit-box:focus {
-  outline: 3px solid black;
-}
-
-.bounce {
-  animation: pulse 0.3s ease-in-out alternate;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-
-  100% {
-    transform: scale(1.1);
-  }
+  height: 72px;
+  width: 56px;
+  border: 1px solid var(--input-border);
+  text-align: center;
+  border-radius: 10px;
+  font-size: 32px;
+  font-weight: 700;
 }
 </style>
