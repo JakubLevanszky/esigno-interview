@@ -29,6 +29,30 @@ input:focus {
   outline: none;
 }
 
+button {
+  width: 399px;
+  border-radius: 4px;
+  background: var(--button-primary);
+  padding: 17px 0px;
+  border: none;
+  color: var(--text-white);
+  font-size: 14px;
+  font-family: Inter;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 32px;
+}
+
+button:hover {
+  background: var(--button-hover);
+}
+
+button:disabled {
+  background: var(--button-primary);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 @media (hover: hover) {
   a:hover {
     color: var(--link-hover);

@@ -13,6 +13,9 @@
 
   --input-border: var(--light-gray);
   --input-border-focused: #4d4d4d;
+
+  --button-primary: var(--color-primary-dark-blue);
+  --button-hover: var(--color-primary-dark-blue-hover);
 }
 
 /* semantic color variables for this project */
