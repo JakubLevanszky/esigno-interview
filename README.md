@@ -1,6 +1,6 @@
 # esigno-interview
 
-This template should help get you started developing with Vue 3 in Vite.
+This project was built for an interview at the company Nuebo EU. It was not finished due to a lack of time till the deadline.
 
 ## Recommended IDE Setup
 
